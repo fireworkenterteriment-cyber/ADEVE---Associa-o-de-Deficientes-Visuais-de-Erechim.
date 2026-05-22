@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Adeve - Associação dos Deficientes Visuais de Erechim e Região." />
+  <title>ADEVE | Associação dos Deficientes Visuais de Erechim</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --verde-principal: #0b7a43;
+      --verde-escuro: #065a31;
+      --verde-claro: #dff7ea;
+      --fundo: #f7faf8;
+      --branco: #ffffff;
+      --texto: #111111;
+      --texto-secundario: #5c5c5c;
+      --borda: rgba(0, 0, 0, 0.08);
+      --sombra: 0 12px 40px rgba(0, 0, 0, 0.08);
+      --raio: 26px;
+      --container: 1200px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Times New Roman", Times, serif;
+      background: var(--fundo);
+      color: var(--texto);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(92%, var(--container));
+      margin: 0 auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 20px;
+      background: #000;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 12px;
+      z-index: 9999;
+    }
+
+    .skip-link:focus {
+      left: 20px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      backdrop-filter: blur(18px);
+      background: rgba(255, 255, 255, 0.82);
+      border-bottom: 1px solid var(--borda);
+    }
+
+    .header-content {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .logo img {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: var(--sombra);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    nav a {
+      color: var(--texto-secundario);
+      font-weight: 600;
+      transition: color 0.25s ease;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      color: var(--verde-principal);
+      outline: none;
+    }
+
+    .header-buttons {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .access-button,
+    .menu-button,
+    .btn-primary,
+    .btn-secondary,
+    .form-button {
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .access-button {
+      background: var(--verde-principal);
+      color: white;
+      padding: 12px 18px;
+      border-radius: 999px;
+      box-shadow: var(--sombra);
+    }
+
+    .access-button:hover,
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .form-button:hover {
+      transform: translateY(-1px);
+    }
+
+    .menu-button {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: var(--verde-principal);
+      color: white;
+      font-size: 1.2rem;
+      box-shadow: var(--sombra);
+    }
+
+    .hero {
+      padding: 100px 0 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 620px;
+      height: 620px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(11, 122, 67, 0.12), transparent 68%);
+      top: -180px;
+      right: -180px;
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--verde-claro);
+      color: var(--verde-escuro);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 6vw, 5.8rem);
+      line-height: 0.96;
+      letter-spacing: -3px;
+      margin-bottom: 22px;
+      max-width: 10ch;
+    }
+
+    .hero p {
+      color: var(--texto-secundario);
+      font-size: 1.1rem;
+      max-width: 620px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 24px;
+      border-radius: 999px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--verde-principal), var(--verde-escuro));
+      color: white;
+      box-shadow: var(--sombra);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--texto);
+      border: 1px solid var(--borda);
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 32px;
+      padding: 28px;
+      box-shadow: var(--sombra);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 28px;
+      object-fit: cover;
+      background: white;
+      border: 1px solid var(--borda);
+    }
+
+    .hero-card h2 {
+      font-size: 1.9rem;
+      margin: 22px 0 12px;
+      line-height: 1.05;
+    }
+
+    .hero-card p {
+      color: var(--texto-secundario);
+      font-size: 1rem;
+    }
+
+    section {
+      padding: 88px 0;
+    }
+
+    .section-title {
+      max-width: 760px;
+      margin-bottom: 42px;
+    }
+
+    .section-title span {
+      display: inline-block;
+      color: var(--verde-principal);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+      margin-bottom: 12px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2.1rem, 4vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -2px;
+      margin-bottom: 16px;
+    }
+
+    .section-title p {
+      color: var(--texto-secundario);
+      font-size: 1.05rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: var(--raio);
+      border: 1px solid var(--borda);
+      box-shadow: var(--sombra);
+      transition: transform 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      font-size: 1.25rem;
+    }
+
+    .card p {
+      color: var(--texto-secundario);
+    }
+
+    .green-section {
+      background: linear-gradient(180deg, #eefaf2 0%, #ffffff 100%);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .contact-card {
+      background: white;
+      padding: 30px;
+      border-radius: var(--raio);
+      border: 1px solid var(--borda);
+      box-shadow: var(--sombra);
+    }
+
+    .contact-card p {
+      margin-bottom: 12px;
+      color: var(--texto);
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      border: 1px solid var(--borda);
+      border-radius: 16px;
+      padding: 16px;
+      font: inherit;
+      background: #fff;
+      color: var(--texto);
+    }
+
+    .contact-form textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-button {
+      background: var(--verde-principal);
+      color: white;
+      padding: 16px;
+      border-radius: 999px;
+      box-shadow: var(--sombra);
+    }
+
+    footer {
+      padding: 38px 0;
+      background: white;
+      border-top: 1px solid var(--borda);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: var(--texto-secundario);
+    }
+
+    html.a11y-mode {
+      background: #fff;
+    }
+
+    html.a11y-mode body {
+      background: #fff;
+      color: #000;
+      font-size: 18px;
+    }
+
+    html.a11y-mode .card,
+    html.a11y-mode .hero-card,
+    html.a11y-mode .contact-card {
+      border: 2px solid #000;
+      box-shadow: none;
+    }
+
+    html.a11y-mode a,
+    html.a11y-mode button {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    html.a11y-mode .hero-tag {
+      background: #e7f5eb;
+      color: #000;
+    }
+
+    html.a11y-mode .skip-link {
+      background: #000;
+    }
+
+    .focusable:focus-visible,
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid #7ad7a1;
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 980px) {
+      nav {
+        position: fixed;
+        top: 82px;
+        left: -100%;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.98);
+        border-bottom: 1px solid var(--borda);
+        flex-direction: column;
+        padding: 24px;
+        gap: 20px;
+        transition: left 0.35s ease;
+      }
+
+      nav.active {
+        left: 0;
+      }
+
+      .menu-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero-grid,
+      .cards,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+
+      .hero h1 {
+        max-width: 100%;
+      }
+
+      .hero-card {
+        max-width: 560px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 2.7rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .btn-primary,
+      .btn-secondary,
+      .access-button,
+      .form-button {
+        width: 100%;
+      }
+
+      .section-title h2 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link focusable" href="#conteudo">Pular para o conteúdo principal</a>
+
+  <header>
+    <div class="container header-content">
+      <a href="#inicio" class="logo.png" aria-label="Adeve, página inicial">
+        <div style="width:52px;height:52px;border-radius:18px;background:linear-gradient(135deg,#0b7a43,#0f9d58);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:1.2rem;box-shadow:var\(--sombra\);">
+          A
+        </div>
+        <span>ADEVE</span>
+      </a>
+
+      <nav id="menu" aria-label="Navegação principal">
+        <a href="#sobre">Sobre</a>
+        <a href="#historia">História</a>
+        <a href="#atuacao">Atuação</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <div class="header-buttons">
+        <button class="access-button focusable" id="accessButton" type="button">
+          Modo acessível
+        </button>
+
+        <button class="menu-button focusable" id="menuButton" type="button" aria-label="Abrir menu">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <span class="hero-tag">Associação de Deficientes Visuais de Erechim</span>
+
+          <h1>Associação de Deficientes Visuais de Erechim.</h1>
+
+          <p>
+            A ADEVE atua promovendo acessibilidade, inclusão social e autonomia para pessoas com
+            Deficiência Visual em Erechim e Região.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#sobre" class="btn-primary focusable">Conheça a Nossa Instituição</a>
+            <a href="#contato" class="btn-secondary focusable">Entre em Contato Conosco</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div style="width:100%;height:320px;border-radius:28px;background:linear-gradient(135deg,#0b7a43,#0f9d58);display:flex;align-items:center;justify-content:center;color:white;font-size:3rem;font-weight:800;letter-spacing:4px;">
+            ADEVE
+          </div>
+          <h2>Uma instituição comprometida com o acolhimento e a inclusão.</h2>
+          <p>
+            A ADEVE trabalha com responsabilidade, acolhimento e compromisso social, valorizando as
+            potencialidades de cada indivíduo.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <div class="container">
+        <div class="section-title">
+          <span>Sobre a Instituição</span>
+          <h2>Quem é a ADEVE?</h2>
+          <p>
+            Mais do que uma Instituição, a ADEVE é um espaço de convivência, crescimento e fortalecimento da independência das pessoas com deficiência visual.
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <h3>Nosso Compromisso:</h3>
+            <p>A ADEVE tem como compromisso promover o desenvolvimento, a autonomia e a participação social das pessoas com deficiência visual, por meio de ações educativas, culturais, recreativas e de orientação, contribuindo para a melhoria da qualidade de vida, o fortalecimento da independência e da valorização de cada indivíduo.</p>
+          </article>
+
+          <article class="card">
+            <h3>O que buscamos:</h3>
+            <p>Ser referência no desenvolvimento e apoio às pessoas com deficiência visual, promovendo acessibilidade, autonomia e participação social. 
+              A ADEVE busca contribuir para a construção de uma sociedade mais acolhedora, consciente e com mais oportunidades para todos.</p>
+          </article>
+
+          <article class="card">
+            <h3>No que acreditamos:</h3>
+            <p>A ADEVE acredita no respeito às diferenças, no acolhimento e na promoção da autonomia das pessoas com deficiência visual. Nossas ações valorizam os talentos e conquistas de cada indivíduo, incentivando o aprendizado, a convivência em comunidade e a igualdade de oportunidades, contribuindo para uma sociedade mais humana e consciente.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="green-section" id="historia">
+      <div class="container">
+        <div class="section-title">
+          <span>Nossa história</span>
+          <h2>Uma trajetória construída com propósito</h2>
+          <p>
+            Fundada em 30 de agosto de 2012, a ADEVE surgiu com o objetivo de acolher pessoas com
+            deficiência visual e ampliar oportunidades de inclusão e participação social.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <h3>Fundação</h3>
+            <p>A ADEVE foi fundada oficialmente em 30 de agosto de 2012, após uma caminhada marcada por muitos desafios, esforço e persistência. Nos primeiros anos, a associação não possuía sede nem estrutura própria, os encontros aconteciam em salas emprestadas, graças ao apoio de pessoas e instituições parceiras que acreditaram na causa. Mesmo enfrentando dificuldades financeiras, burocráticas e preconceitos, os fundadores nunca desistiram e com muita coragem, buscaram apoio da comunidade, organizaram campanhas, conquistaram sua sede e começaram a construir um espaço voltado ao acolhimento e à autonomia das pessoas cegas e com deficiência visual. Cada conquista da ADEVE foi resultado da união de associados, voluntários e apoiadores que acreditaram no sonho de transformar vidas por meio da inclusão e do respeito.</p>
+          </article>
+
+          <article class="card">
+            <h3>Desenvolvimento</h3>
+            <p>Com o passar dos anos, a ADEVE foi crescendo e se fortalecendo como referência regional no atendimento às pessoas com deficiência visual. A associação ampliou suas atividades, estruturou seus atendimentos e passou a acolher pessoas não apenas de Erechim, mas também de diversos municípios da região. Cada conquista foi construída com muito trabalho coletivo, dedicação e apoio da comunidade, onde aos poucos, a associação conseguiu organizar melhor seus serviços, adquirir materiais, ampliar os projetos e oferecer mais oportunidades de inclusão e independência aos associados. A ADEVE também se tornou um importante espaço de convivência, amizade e troca de experiências, ajudando muitas pessoas a conquistarem mais autonomia no dia a dia, confiança e qualidade de vida.</p>
+          </article>
+
+          <article class="card">
+            <h3>Comunidade</h3>
+            <p>A ADEVE desenvolve projetos e atividades voltados à inclusão, autonomia e bem-estar das pessoas cegas e com deficiência visual de Erechim e região, buscando promover independência, acessibilidade e qualidade de vida por meio de atendimentos, oficinas e ações sociais. Entre as atividades oferecidas estão orientação e mobilidade, ensino de braile, inclusão digital com informática e celular acessível, atividades da vida diária, apoio psicológico, serviço social, música, dança, pilates e práticas adaptadas. Além dos atendimentos, a ADEVE também realiza palestras e ações de conscientização em escolas, empresas e na comunidade, levando informações sobre acessibilidade, inclusão e respeito às pessoas com deficiência visual.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="atuacao">
+      <div class="container">
+        <div class="section-title">
+          <span>Atuação institucional</span>
+          <h2>Como a ADEVE atua</h2>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <h3>Atendimento ao Público</h3>
+            <p>A ADEVE desenvolve atividades voltadas à promoção da autonomia, da inclusão e do desenvolvimento pessoal de pessoas com deficiência visual. Por meio de atividades como músicas, dança, exercícios físicos, culinária, jogos educativos e recreativos, orientações para o uso da bengala e atividades relacionadas ao uso aprendizado e uso da tecnologia, a instituição busca ampliar habilidades, fortalecer a independência e estimular a participação ativa no cotidiano. As ações realizadas contribuem para o desenvolvimento da confiança, da socialização, do aprendizado e da qualidade de vida dos participantes, valorizando suas potencialidades e respeitando suas individualidades.</p>
+          </article>
+
+          <article class="card">
+            <h3>Projetos e Ações Sociais</h3>
+            <p>A ADEVE realiza diversos projetos e ações com o propósito de promover a acessibilidade, participação social e novas oportunidades para as pessoas com deficiências visuais. As iniciativas desenvolvidas pela instituição incentivam o aprendizado, a convivência e o fortalecimento da independência dos participantes, contribuindo para seu crescimento pessoal e social. Entre as ações promovidas estão oficinas, atividades culturais, momentos de lazer, capacitações e experiências voltadas ao dia a dia, sempre buscando estimular o protagonismo e ampliar a autonomia dos usuários. Além disso, a instituição também desenvolve ações de conscientização junto à comunidade, reforçando a importância da acessibilidade, da empatia e da valorização das potencialidades das pessoas com deficiência visual.</p>
+          </article>
+
+          <article class="card">
+            <h3>Informações Institucionais.</h3>
+            <p>De segundas à sextas-feiras, das 8h às 17h, a Adeve está disponível para atendimento presencial, oferecendo suporte, orientação e informações sobre seus serviços e projetos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="green-section" id="contato">
+      <div class="container">
+        <div class="section-title">
+          <span>Contato</span>
+          <h2>Entre em contato com a ADEVE</h2>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <p><strong>Email:</strong> adeve.erechim@gmail.com</p>
+            <p><strong>Telefone:</strong> (54) 99118-9337</p>
+            <p><strong>Instagram:</strong> @adeve.erechim</p>
+            <p><strong>Cidade:</strong> Erechim - RS</p>
+          </div>
+
+          <form class="contact-card contact-form">
+            <input type="text" placeholder="Seu nome" aria-label="Seu nome" />
+            <input type="email" placeholder="Seu email" aria-label="Seu email" />
+            <textarea placeholder="Digite sua mensagem" aria-label="Digite sua mensagem"></textarea>
+            <button type="submit" class="form-button">Enviar mensagem</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <p>© 2026 ADEVE - Associação dos Deficientes Visuais de Erechim.</p>
+      <p>Inclusão, Acessibilidade e Desenvolvimento Humano.</p>
+    </div>
+  </footer>
+
+  <script>
+    const accessButton = document.getElementById("accessButton");
+    const menuButton = document.getElementById("menuButton");
+    const menu = document.getElementById("menu");
+
+    menuButton.addEventListener("click", () => {
+      menu.classList.toggle("active");
+      const opened = menu.classList.contains("active");
+      menuButton.setAttribute("aria-label", opened ? "Fechar menu" : "Abrir menu");
+    });
+
+    function setAccessibility(enabled) {
+      document.documentElement.classList.toggle("a11y-mode", enabled);
+      localStorage.setItem("adeve-accessibility", enabled ? "1" : "0");
+      accessButton.innerText = enabled ? "Modo acessível ativado" : "Modo acessível";
+    }
+
+    const savedMode = localStorage.getItem("adeve-accessibility") === "1";
+    setAccessibility(savedMode);
+
+    accessButton.addEventListener("click", () => {
+      const enabled = !document.documentElement.classList.contains("a11y-mode");
+      setAccessibility(enabled);
+    });
+
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 980) {
+          menu.classList.remove("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
